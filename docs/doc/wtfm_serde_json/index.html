@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="WTFM for serde_json"><title>wtfm_serde_json - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="wtfm_serde_json" data-themes="" data-resource-suffix="" data-rustdoc-version="1.92.0 (ded5c06cf 2025-12-08) (Homebrew)" data-channel="1.92.0" data-search-js="search-d69d8955.js" data-stringdex-js="stringdex-c3e638e9.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-ce535bd0.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate wtfm_serde_json</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../wtfm_serde_json/index.html">wtfm_<wbr>serde_<wbr>json</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#wtfm-for-serde_json" title="WTFM for serde_json">WTFM for serde_json</a><ul><li><a href="#it-works" title="It works!">It works!</a></li></ul></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>wtfm_<wbr>serde_<wbr>json</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/wtfm_serde_json/lib.rs.html#1-55">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="wtfm-for-serde_json"><a class="doc-anchor" href="#wtfm-for-serde_json">§</a>WTFM for <a href="../serde_json/index.html" title="mod serde_json">serde_json</a></h2>
+<p>Although this is an empty crate with doc-tests only, <code>cargo doc</code>
+by default builds documentation for dependencies</p>
+<div class="example-wrap"><pre class="language-sh"><code>% du -hsc docs/doc/*
+4.0K	docs/doc/crates.js
+4.0K	docs/doc/help.html
+64K	docs/doc/itoa
+2.9M	docs/doc/memchr
+696K	docs/doc/search.index
+4.4M	docs/doc/serde_core
+4.1M	docs/doc/serde_json
+4.0K	docs/doc/settings.html
+3.8M	docs/doc/src
+4.0K	docs/doc/src-files.js
+1.8M	docs/doc/static.files
+548K	docs/doc/trait.impl
+248K	docs/doc/type.impl
+ 16K	docs/doc/wtfm_serde_json
+ 52K	docs/doc/zmij
+ 19M	total</code></pre></div>
+<p>We can navigate to them via the sidebar menu.</p>
+<h3 id="it-works"><a class="doc-anchor" href="#it-works">§</a>It works!</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>serde_json::{<span class="prelude-ty">Result</span>, Value};
+
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;()&gt; {
+   <span class="comment">// Some JSON input data as a &amp;str. Maybe this comes from the user.
+   </span><span class="kw">let </span>data = <span class="string">r#"
+       {
+           "name": "John Doe",
+           "age": 43,
+           "phones": [
+               "+44 1234567",
+               "+44 2345678"
+           ]
+       }"#</span>;
+
+   <span class="comment">// Parse the string of data into serde_json::Value.
+   </span><span class="kw">let </span>v: Value = serde_json::from_str(data)<span class="question-mark">?</span>;
+
+   <span class="comment">// Access parts of the data by indexing with square brackets.
+   </span><span class="macro">debug_assert_eq!</span>(
+       <span class="macro">format!</span>(<span class="string">"Please call {} at the number {}"</span>, v[<span class="string">"name"</span>], v[<span class="string">"phones"</span>][<span class="number">0</span>]),
+       <span class="string">"Please call \"John Doe\" at the number \"+44 1234567\""
+   </span>);
+
+   <span class="prelude-val">Ok</span>(())
+}</code></pre><a class="test-arrow" target="_blank" title="Run code" href="https://play.rust-lang.org/?code=%23!%5Ballow(unused)%5D%0Ause+serde_json::%7BResult,+Value%7D;%0A%0Afn+main()+-%3E+Result%3C()%3E+%7B%0A+++//+Some+JSON+input+data+as+a+%26str.+Maybe+this+comes+from+the+user.%0A+++let+data+=+r%23%22%0A+++++++%7B%0A+++++++++++%22name%22:+%22John+Doe%22,%0A+++++++++++%22age%22:+43,%0A+++++++++++%22phones%22:+%5B%0A+++++++++++++++%22%2B44+1234567%22,%0A+++++++++++++++%22%2B44+2345678%22%0A+++++++++++%5D%0A+++++++%7D%22%23;%0A%0A+++//+Parse+the+string+of+data+into+serde_json::Value.%0A+++let+v:+Value+=+serde_json::from_str(data)?;%0A%0A+++//+Access+parts+of+the+data+by+indexing+with+square+brackets.%0A+++debug_assert_eq!(%0A+++++++format!(%22Please+call+%7B%7D+at+the+number+%7B%7D%22,+v%5B%22name%22%5D,+v%5B%22phones%22%5D%5B0%5D),%0A+++++++%22Please+call+%5C%22John+Doe%5C%22+at+the+number+%5C%22%2B44+1234567%5C%22%22%0A+++);%0A%0A+++Ok(())%0A%7D&amp;edition=2024"></a></div></div></details></section></div></main></body></html>
